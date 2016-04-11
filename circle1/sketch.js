@@ -3,6 +3,7 @@ var ypoints = [];
 var npointsInit = 360;
 var deleteAtIndex;
 var bTransforming;
+var notTransformingCount;
 
 function setup() {
   createCanvas(400, 400);
@@ -12,10 +13,10 @@ function setup() {
 
 function draw() {
   background(255, 255, 255);
-  noFill(); 
+  noFill();
   stroke(0);
-  strokeWeight(3); 
-  
+  strokeWeight(3);
+
   push();
   translate(width / 2, height / 2);
   rotate(-HALF_PI);
@@ -26,10 +27,10 @@ function draw() {
     vertex(px, py);
   }
   endShape(CLOSE);
-  
+
   if (bTransforming) {
     deleteAtIndex--;
-    if ((deleteAtIndex == (2*npointsInit/3)) || (deleteAtIndex == (npointsInit/3))){
+    if ((deleteAtIndex == (2 * npointsInit / 3)) || (deleteAtIndex == (npointsInit / 3))) {
       deleteAtIndex--;
     }
     xpoints.splice(deleteAtIndex, 1);
@@ -39,20 +40,29 @@ function draw() {
     }
   }
   pop();
+
+  if (!bTransforming){
+    notTransformingCount++;
+    if (notTransformingCount > 60){
+      mousePressed(); 
+    }
+  }
 }
 
 function mousePressed() {
-  if (bTransforming || (xpoints.length == 3)){
+  if (bTransforming || (xpoints.length == 3)) {
     bTransforming = false;
     initialize();
   } else {
     bTransforming = true;
     deleteAtIndex = npointsInit - 1;
+    notTransformingCount = 0; 
   }
 }
 
 function initialize() {
-  var radius = width/2 * 0.75; 
+  notTransformingCount = 0;
+  var radius = width / 2 * 0.75;
   for (var i = 0; i < npointsInit; i++) {
     var t = map(i, 0, npointsInit, 0, -TWO_PI);
     var px = radius * cos(t);
