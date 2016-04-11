@@ -2,6 +2,7 @@ var radius;
 var cx, cy;
 var trianglePoints = [];
 
+//-----------------------------------------
 function setup() {
   createCanvas(400, 400);
 
