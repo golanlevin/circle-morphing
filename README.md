@@ -1,4 +1,4 @@
-# circletriangle
+# circle-morphing
 
 Interpolations from a circle to a square (or triangle) in p5.js
 
