@@ -1,6 +1,12 @@
+// Convert a circle into a square
+// by gradually flattening the circle on four sides.
+// Golan Levin, August 2016
+
 var radius;
 var cx, cy;
-var third; 
+var quarter;
+var nSquarePoints = 4;
+var nArcPoints = 30;
 
 //-----------------------------------------
 function setup() {
@@ -8,7 +14,7 @@ function setup() {
   radius = width / 2 * 0.75;
   cx = width / 2;
   cy = height / 2;
-  third = TWO_PI / 3.0;
+  quarter = TWO_PI / nSquarePoints;
 }
 
 //-----------------------------------------
@@ -18,16 +24,15 @@ function draw() {
   stroke(0);
   strokeWeight(3);
   strokeJoin(ROUND);
-  
-  var amount = pow(0.5 + 0.5*sin(millis()/2000.0), 2.0);
-  var nArcPoints = 30; 
-  
+
+  var amount = pow(0.5 + 0.5 * sin(millis() / 2000.0), 2.0);
+
   beginShape();
-  for (var j = 0; j < 3; j++) {
+  for (var j = 0; j < nSquarePoints; j++) {
     for (var i = 0; i <= nArcPoints; i++) {
-      var angCenter = (j+0.5) * third;
-      var angA = angCenter - amount * 0.5 * third;
-      var angB = angCenter + amount * 0.5 * third;
+      var angCenter = (j + 0.5) * quarter;
+      var angA = angCenter - amount * 0.5 * quarter;
+      var angB = angCenter + amount * 0.5 * quarter;
       var t = map(i, 0, nArcPoints, angA, angB) + HALF_PI;
       var px = cx + radius * cos(t);
       var py = cy + radius * sin(t);
