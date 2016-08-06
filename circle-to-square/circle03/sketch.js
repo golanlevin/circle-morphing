@@ -3,7 +3,6 @@
 // whose radii lengthen to infinity
 // Golan Levin, August 2016
 
-
 var radius;
 var squarePoints = [];
 var nSquarePoints = 4;
