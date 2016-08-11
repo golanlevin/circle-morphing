@@ -33,23 +33,32 @@ function draw() {
 
   var currentRadii01 = 0.5 + 0.5 * sin(millis() / 2000.0);
   var rad = currentRadii01 * radius;
+  var phase = cos(millis() / 2000.0);
 
   stroke(0);
   strokeWeight(3);
   strokeJoin(ROUND);
   beginShape();
   for (var i = 0; i < nSquarePoints; i++) {
-    var px = map(currentRadii01, 0, 1, squarePoints[i].x, 0);
-    var py = map(currentRadii01, 0, 1, squarePoints[i].y, 0);
+    
+    px = map(currentRadii01, 0, 1, squarePoints[i].x, 0);
+    py = map(currentRadii01, 0, 1, squarePoints[i].y, 0);
+    if (phase < 0){
+      px = 0-px; 
+      py = 0-py; 
+    }
 
     var ang1 = (i + 1) * TWO_PI / nSquarePoints + HALF_PI / 2 + PI;
     var ang2 = (i + 2) * TWO_PI / nSquarePoints + HALF_PI / 2 + PI;
-    var dang = (ang2 - ang1) / (180.0 / nSquarePoints);
-    for (var t = ang1; t <= ang2; t += dang) {
+  
+    var nPointsInArc = 60;
+    for (var j = 0; j <= nPointsInArc; j++) {
+      var t = map(j,0,nPointsInArc, ang1,ang2);
       var ax = px + rad * cos(t);
       var ay = py + rad * sin(t);
       vertex(ax, ay);
     }
+
   }
   endShape(CLOSE);
 
