@@ -12,7 +12,7 @@ var srcPoints = []; // points along the circle
 var dstPoints = []; // points along the square
 var curPercents = []; // percentages of interpolation
 var durPercents = [];
-var bDrawDebug = false;
+var bDrawDebug = true;
 
 //-----------------------------------------
 function setup() {

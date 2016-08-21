@@ -4,7 +4,7 @@
 // See: http://www.tinaja.com/glib/ellipse4.pdf
 // Golan Levin, August 2016
 
-var bDrawDebug = false;
+var bDrawDebug = true;
 var radius;
 var magicNumber = 0.551784; 
 var squarePoints = [];

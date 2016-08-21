@@ -6,7 +6,7 @@
 var radius;
 var squarePoints = [];
 var nSquarePoints = 4;
-var bDrawDebug = false;
+var bDrawDebug = true;
 
 //-----------------------------------------
 function setup() {

@@ -10,7 +10,7 @@ var nSquarePoints = 4;
 var squarePoints = [];
 var srcPoints = []; // points on the circle
 var dstPoints = []; // points on the square
-var bDrawDebug = false;
+var bDrawDebug = true;
 
 //-----------------------------------------
 function setup() {
