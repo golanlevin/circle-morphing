@@ -1,7 +1,7 @@
 // Convert a circle into a square
 // by considering it as a set of alternating straight lines and arcs
 // in which the arcs shrink while the lines grow.
-// (Variant of Circle06)
+// (Technically, aariant of Circle06)
 // Golan Levin, August 2016
 
 var radius;

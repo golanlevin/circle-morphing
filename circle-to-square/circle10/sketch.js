@@ -1,5 +1,5 @@
 // Convert a circle into a square
-// by treating it as a series of springy particles
+// by treating points along the perimeter as a series of springy particles
 // Golan Levin, August 2016
 
 var nPoints, quarter, offset;

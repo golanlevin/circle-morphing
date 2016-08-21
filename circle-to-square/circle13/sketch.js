@@ -1,5 +1,5 @@
 // Convert a circle into a square
-// By progressively subdividing into 
+// By progressively subdividing it into 
 // a 4-gon, 8-gon, 16-gon, 32-gon, etc., 
 // with smooth interpolations.
 // Golan Levin, August 2016

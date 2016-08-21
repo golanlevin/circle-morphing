@@ -1,5 +1,5 @@
 // Convert a circle into a square
-// using a 'superellipse' formula
+// by using a 'superellipse' formula
 // See: http://mathworld.wolfram.com/Superellipse.html
 // Golan Levin, August 2016
 
