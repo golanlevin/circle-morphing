@@ -25,5 +25,5 @@
 10. ([code](circle10/sketch.js)) by treating points along the perimeter as a series of springy particles
 11. ([code](circle11/sketch.js)) by considering it as a set of alternating straight lines and arcs in which the arcs shrink while the lines grow
 12. ([code](circle12/sketch.js)) by using a 'superellipse' formula
-13.  ([code](circle13/sketch.js)) By progressively subdividing it into a 4-gon, 8-gon, 16-gon, 32-gon, etc., with smooth interpolations.
-
+13.  ([code](circle13/sketch.js)) by progressively subdividing it into a 4-gon, 8-gon, 16-gon, 32-gon, etc., with smooth interpolations.
+14. ([code](circle14/sketch.js)) by abruptly moving points evenly sampled along the circle, towards corresponding points on the square
