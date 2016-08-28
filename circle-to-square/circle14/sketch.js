@@ -3,15 +3,17 @@
 // towards points on the square, resampled at equal intervals.
 // Golan Levin, August 2016
 
-var nPoints, quarter;
 var radius;
+var nPoints, quarter;
+var shiftQuadrant = 0;
 var nSquarePoints = 4;
+var counter = 0;
 var squarePoints = []; // the 4 vertices of the square
 var srcPoints = []; // points along the circle
 var dstPoints = []; // points along the square
 var curPercents = []; // percentages of interpolation
 var bDrawDebug = true;
-var counter = 0;
+var bDoSkipQuadrant = true;
 
 //-----------------------------------------
 function setup() {
@@ -73,18 +75,32 @@ function draw() {
   translate(width / 2, height / 2);
 
   if (mouseIsPressed) { // whoa
-    rotate(HALF_PI + PI - map(counter, 0, nPoints, 0, TWO_PI));
+    rotate(HALF_PI + PI - map(counter + 1, 0, nPoints, 0, TWO_PI));
   } else {
     rotate(PI * 0.25);
   }
 
-  counter = (counter + 1) % nPoints;
-  curPercents[counter] = 1 - curPercents[counter];
+
+  counter = (counter + 1) % (nPoints);
+
+  if (!bDoSkipQuadrant) {
+    curPercents[counter] = 1 - curPercents[counter];
+  } else {
+    var curQuadrant = int(counter / quarter);
+    if (curQuadrant != shiftQuadrant) {
+      curPercents[counter] = 1 - curPercents[counter];
+    }
+    if (counter === 0) {
+      shiftQuadrant = (shiftQuadrant + 1) % (nSquarePoints + 1);
+    }
+  }
 
   if (bDrawDebug) {
     stroke(255, 0, 0, 64);
     strokeWeight(1);
-    line(0, 0, dstPoints[counter].x, dstPoints[counter].y);
+    px = map(curPercents[counter], 0, 1, srcPoints[counter].x, dstPoints[counter].x);
+    py = map(curPercents[counter], 0, 1, srcPoints[counter].y, dstPoints[counter].y);
+    line(0, 0, px, py);
   }
 
   stroke(0);
@@ -98,7 +114,8 @@ function draw() {
     py = map(pcti, 0, 1, srcPoints[i].y, dstPoints[i].y);
     vertex(px, py);
 
-    if (pcti !== pctj) {
+    if (((pcti !== pctj) && (!bDoSkipQuadrant)) ||
+      ((pcti !== pctj) && (bDoSkipQuadrant) && (((i + 1) % quarter) != 0))) {
       qx = map(pctj, 0, 1, srcPoints[i].x, dstPoints[i].x);
       qy = map(pctj, 0, 1, srcPoints[i].y, dstPoints[i].y);
       vertex(qx, qy);
