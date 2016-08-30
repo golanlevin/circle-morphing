@@ -7,6 +7,7 @@
 * Dan Shiffman's ["10 Minute Coding Challenges - Shape Morphing"](https://www.youtube.com/watch?v=Md5LIDW0RyY&t=12m35s) (12:35-43:20). 
 * Dan Shiffman's ["Coding Challenge #19: Superellipse"](https://www.youtube.com/watch?v=z86cx2A4_3E&t=4m22s) (4:22-12:00).
 * [A Book of drawCircle()](http://sfpcyukiy.tumblr.com/post/104067533568/a-book-of-drawcircle) & [Github](https://github.com/yukiy/drawCircle) by [Yuki Yoshida](http://sfpc.io/people/yuki-yoshida/)
+* [Squaring the Circle](http://troika.uk.com/work/squaring-the-circle/) and [Dark Matter](https://www.youtube.com/watch?v=5q5G0jP9cTw)  by Troika
 
 
 --
