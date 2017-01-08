@@ -1,6 +1,6 @@
-// Convert a circle into a square
+// Transform a circle into a square
 // by gradually flattening the circle on four sides.
-// Golan Levin, August 2016
+// Golan Levin, January 2017
 
 var radius;
 var cx, cy;

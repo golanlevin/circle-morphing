@@ -1,12 +1,12 @@
-// Convert a circle into a square
+// Transform a circle into a square
 // by linearly interpolating points on the circle
 // towards points on the square, along radii of the circle
-// Golan Levin, August 2016
+// Golan Levin, January 2017
 
 var nPoints;
 var radius;
 var cx, cy;
-var nSquarePoints = 4;
+var nVertices = 4;
 var squarePoints = [];
 var srcPoints = []; // points on the circle
 var dstPoints = []; // points on the square
@@ -21,12 +21,10 @@ function setup() {
   cx = 0;
   cy = 0;
 
-  for (var i = 0; i < nSquarePoints; i++) { // square vertices
-    var x = cx + radius * cos(i * TWO_PI / nSquarePoints - HALF_PI);
-    var y = cy + radius * sin(i * TWO_PI / nSquarePoints - HALF_PI);
-    squarePoints[i] = {
-      x, y
-    };
+  for (var i = 0; i < nVertices; i++) { // square vertices
+    var x = cx + radius * cos(i * TWO_PI / nVertices - HALF_PI);
+    var y = cy + radius * sin(i * TWO_PI / nVertices - HALF_PI);
+    squarePoints[i] = { x, y };
   }
 
   // compute srcPoints: points on the circle
@@ -36,25 +34,23 @@ function setup() {
     var srcy = cy + radius * sin(t);
     var x = srcx;
     var y = srcy;
-    srcPoints[j] = {
-      x, y
-    };
+    srcPoints[j] = { x, y };
   }
 
   // compute dstPoints: points along the triangle
   for (var j = 0; j < nPoints; j++) {
-    var i = (floor((j + nPoints - 1) / (nPoints / nSquarePoints)) + 1) % nSquarePoints;
+    var i = (floor((j + nPoints - 1) / (nPoints / nVertices)) + 1) % nVertices;
     var p1x = squarePoints[i].x;
     var p1y = squarePoints[i].y;
-    var p2x = squarePoints[(i + 1) % nSquarePoints].x;
-    var p2y = squarePoints[(i + 1) % nSquarePoints].y;
+    var p2x = squarePoints[(i + 1) % nVertices].x;
+    var p2y = squarePoints[(i + 1) % nVertices].y;
 
     var p3x = cx;
     var p3y = cy;
     var p4x = srcPoints[j].x;
     var p4y = srcPoints[j].y;
 
-    // http://paulbourke.net/geometry/pointlineplane/ 
+    // See: http://paulbourke.net/geometry/pointlineplane/ 
     var numea = (p4x - p3x) * (p1y - p3y) - (p4y - p3y) * (p1x - p3x);
     var numeb = (p2x - p1x) * (p1y - p3y) - (p2y - p1y) * (p1x - p3x);
     var denom = (p4y - p3y) * (p2x - p1x) - (p4x - p3x) * (p2y - p1y);
@@ -104,4 +100,8 @@ function draw() {
     }
   }
   pop();
+}
+
+function keyPressed(){
+  bDrawDebug = !bDrawDebug;
 }

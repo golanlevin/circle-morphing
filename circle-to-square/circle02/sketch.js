@@ -1,10 +1,10 @@
-// Convert a circle into a square
-// by approximating a circle with 4 Bezier cubic splines
-// and modulating the spline control points.
-// See: http://www.tinaja.com/glib/ellipse4.pdf
-// Golan Levin, August 2016
+// Transform a circle into a square
+// by approximating a circle with 4 Bézier cubic splines
+// and modulating the spline control points. For magic numbers, 
+// see: http://www.tinaja.com/glib/ellipse4.pdf
+// Golan Levin, January 2017
 
-var bDrawDebug = true;
+var bDrawDebug = false;
 var radius;
 var magicNumber = 0.551784; 
 var squarePoints = [];
@@ -17,9 +17,7 @@ function setup() {
   for (var i = 0; i < nSquarePoints; i++) { // square vertices
     var x = radius * cos(i * TWO_PI / nSquarePoints - HALF_PI);
     var y = radius * sin(i * TWO_PI / nSquarePoints - HALF_PI);
-    squarePoints[i] = {
-      x, y
-    };
+    squarePoints[i] = { x, y };
   }
 }
 
@@ -27,12 +25,14 @@ function setup() {
 function draw() {
   background(255);
   noFill();
+  strokeJoin(ROUND);
+
   push(); 
   translate(width / 2, height/2);
   rotate(PI * 0.25);
 
-  var wiggle = -0.5 * (1 + sin(millis() / 2000.0));
-  var amount = magicNumber * wiggle;
+  var backAndForth = -0.5 * (1 + sin(millis() / 2000.0));
+  var amount = magicNumber * backAndForth;
   for (var i = 0; i < nSquarePoints; i++) {
     var p0x = squarePoints[i].x;
     var p0y = squarePoints[i].y;
@@ -56,10 +56,14 @@ function draw() {
   }
 
   if (bDrawDebug) {
-    stroke(255, 0, 0);
+    stroke(255, 0, 0, 64);
     strokeWeight(1);
     ellipse(0,0, radius * 2, radius * 2);
   }
   
   pop();
+}
+
+function keyPressed(){
+  bDrawDebug = !bDrawDebug; 
 }

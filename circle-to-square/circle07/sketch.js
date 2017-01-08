@@ -1,7 +1,7 @@
-// Convert a circle into a square
+// Transform a circle into a square
 // by treating it as a multisided polygon
 // whose number of sides gradually decreases to 4.
-// Golan Levin, August 2016
+// Golan Levin, January 2017
 var radius;
 
 //-----------------------------------------
@@ -21,7 +21,7 @@ function draw() {
   var maxSides = 90;
   var minSides = 4;
   var t = 0.5 + 0.5 * sin(millis() / 2000.0);
-  t = pow(t, 0.2);
+  t = pow(t, 0.2); // shape the animation slightly
   var nSidesf = constrain(map(t, 0, 1, maxSides, (minSides - 0.25)), minSides, maxSides);
   var nSidesi = ceil(nSidesf);
   var dang = TWO_PI / nSidesf;
