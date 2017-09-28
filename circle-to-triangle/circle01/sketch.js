@@ -1,3 +1,7 @@
+// Convert a circle into a triangle, 
+// by progressively deleting all vertices along a circle
+// except for the triangle's corners
+
 var xpoints = [];
 var ypoints = [];
 var npointsInit = 360;

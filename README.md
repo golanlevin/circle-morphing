@@ -35,7 +35,7 @@
 --
 ### Some Ways of Transforming a Circle into a Triangle
 
-0. ([code](circle-to-triangle/circle00/sketch.js)) by resampling and Zeno's interpolation
+0. ([code](circle-to-triangle/circle00/sketch.js)) // by sampling a circle into many vertices, and then locally averaging each point with its neighbors, except for the three special corner vertices.
 1. ([code](circle-to-triangle/circle01/sketch.js)) by progressively deleting all points except for the triangle's corners
 2. ([code](circle-to-triangle/circle02/sketch.js)) by approximating a circle with three Bezier cubic splines and modulating the spline control points
 3. ([code](circle-to-triangle/circle03/sketch.js)) by approximating a circle with three circular arcs whose radii lengthen to infinity

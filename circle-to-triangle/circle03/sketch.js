@@ -1,6 +1,11 @@
+// Transform a circle to a triangle
+// by approximating a circle with three circular arcs 
+// whose radii lengthen to infinity
+
 var radius;
 var cx, cy;
 var trianglePoints = [];
+var bShowDebug = true;
 
 //-----------------------------------------
 function setup() {
@@ -24,8 +29,8 @@ function draw() {
   background(255);
   noFill();
 
-  var wiggle = max(0.00001, (0.5 * (1.0 + sin(millis()/2000.0)))); 
-  var amount = 1.0/wiggle - 1.0;
+  var wiggle = max(0.00001, (0.5 * (1.0 + sin(millis() / 2000.0))));
+  var amount = 1.0 / wiggle - 1.0;
 
   for (var i = 0; i < 3; i++) {
     var p0x = trianglePoints[i].x;
@@ -35,11 +40,13 @@ function draw() {
     var pcx = cx - amount * ((p0x + p1x) / 2 - cx);
     var pcy = cy - amount * ((p0y + p1y) / 2 - cy);
 
-    // draw control points
-    //stroke(255, 0, 0, 64);
-    //strokeWeight(1);
-    //line(pcx, pcy, p0x, p0y);
-    //line(pcx, pcy, p1x, p1y);
+    if (bShowDebug) {
+      // draw control points
+      stroke(255, 0, 0, 64);
+      strokeWeight(1);
+      line(pcx, pcy, p0x, p0y);
+      line(pcx, pcy, p1x, p1y);
+    }
 
     var dx = p0x - pcx;
     var dy = p0y - pcy;
@@ -51,4 +58,8 @@ function draw() {
     strokeWeight(3);
     arc(pcx, pcy, dh * 2, dh * 2, angle0, angle1, OPEN);
   }
+}
+
+function keyPressed(){
+  bShowDebug = !bShowDebug;
 }

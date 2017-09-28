@@ -1,4 +1,7 @@
-// Convert a circle into a triangle, by resampling and Zeno's interpolation
+// Convert a circle into a triangle, 
+// by sampling a circle into many segments, 
+// and then locally averaging each point with its neighbors, 
+// except for the three special corner vertices.
 // Golan Levin, January 2017
 
 var radius;
