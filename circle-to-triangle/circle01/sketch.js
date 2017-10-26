@@ -1,20 +1,24 @@
 // Convert a circle into a triangle, 
-// by progressively deleting all vertices along a circle
-// except for the triangle's corners
+// by progressively deleting all vertices along a resampled circle
+// except for three vertices (representing the triangle's corners)
 
 var xpoints = [];
 var ypoints = [];
-var npointsInit = 360;
+var npointsInit = 240;
 var deleteAtIndex;
-var bTransforming;
+var bTransformingFromCircleToTriangle;
 var notTransformingCount;
+var bDrawDebug;
 
+//------------------------------------------
 function setup() {
   createCanvas(400, 400);
-  bTransforming = false;
+  bTransformingFromCircleToTriangle = false;
+  bDrawDebug = false;
   initialize();
 }
 
+//------------------------------------------
 function draw() {
   background(255, 255, 255);
   noFill();
@@ -32,7 +36,7 @@ function draw() {
   }
   endShape(CLOSE);
 
-  if (bTransforming) {
+  if (bTransformingFromCircleToTriangle) {
     deleteAtIndex--;
     if ((deleteAtIndex == (2 * npointsInit / 3)) || (deleteAtIndex == (npointsInit / 3))) {
       deleteAtIndex--;
@@ -40,38 +44,62 @@ function draw() {
     xpoints.splice(deleteAtIndex, 1);
     ypoints.splice(deleteAtIndex, 1);
     if (xpoints.length == 3) {
-      bTransforming = false;
+      bTransformingFromCircleToTriangle = false;
     }
   }
   pop();
 
-  if (!bTransforming){
+  drawDebug();
+
+  if (!bTransformingFromCircleToTriangle) {
     notTransformingCount++;
-    if (notTransformingCount > 60){
-      mousePressed(); 
+    if (notTransformingCount > 60) {
+      mousePressed();
     }
   }
 }
 
+//------------------------------------------
 function mousePressed() {
-  if (bTransforming || (xpoints.length == 3)) {
-    bTransforming = false;
+  if (bTransformingFromCircleToTriangle || (xpoints.length == 3)) {
+    bTransformingFromCircleToTriangle = false;
     initialize();
   } else {
-    bTransforming = true;
+    bTransformingFromCircleToTriangle = true;
     deleteAtIndex = npointsInit - 1;
-    notTransformingCount = 0; 
+    notTransformingCount = 0;
   }
 }
 
+//------------------------------------------
 function initialize() {
   notTransformingCount = 0;
-  var radius = width / 2 * 0.75;
+  var radius = (width / 2) * 0.75;
   for (var i = 0; i < npointsInit; i++) {
     var t = map(i, 0, npointsInit, 0, -TWO_PI);
     var px = radius * cos(t);
     var py = radius * sin(t);
     xpoints[i] = px;
     ypoints[i] = py;
+  }
+}
+
+//------------------------------------------
+function keyPressed() {
+  bDrawDebug = !bDrawDebug;
+}
+
+//------------------------------------------
+function drawDebug() {
+  if (bDrawDebug) {
+    push();
+    translate(width / 2, height / 2);
+    rotate(-HALF_PI);
+    strokeWeight(1);
+    stroke(255, 0, 0, 80);
+    for (var i = 0; i < xpoints.length; i++) {
+      line(0, 0, xpoints[i], ypoints[i]);
+    }
+    pop();
   }
 }
