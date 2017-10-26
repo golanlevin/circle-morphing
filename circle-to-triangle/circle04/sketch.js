@@ -4,11 +4,12 @@ var cx, cy;
 var trianglePoints = [];
 var srcPoints = []; // points on the circle
 var dstPoints = []; // points on the triangle
+var bShowDebug = false;
 
 //-----------------------------------------
 function setup() {
   createCanvas(400, 400);
-  
+
   nPoints = 60;
   radius = width / 2 * 0.75;
   cx = width / 2;
@@ -78,11 +79,29 @@ function draw() {
   stroke(0);
   strokeWeight(3);
   beginShape();
+  var t = map(sin(millis() / 2000.0), -1, 1, 0, 1);
   for (var j = 0; j < nPoints; j++) {
-    var t = map(sin(millis()/2000.0), -1,1, 0,1); 
     var px = map(t, 0, 1, srcPoints[j].x, dstPoints[j].x);
     var py = map(t, 0, 1, srcPoints[j].y, dstPoints[j].y);
     vertex(px, py);
   }
   endShape(CLOSE);
+  drawDebug(); 
+}
+
+//-----------------------------------------
+function keyPressed(){
+  bShowDebug = !bShowDebug; 
+}
+
+//-----------------------------------------
+function drawDebug() {
+  if (bShowDebug) {
+    stroke(255,0,0,64);
+    strokeWeight(1);
+    var t = map(sin(millis() / 2000.0), -1, 1, 0, 1);
+    for (var j = 0; j < nPoints; j++) {
+      line(srcPoints[j].x, srcPoints[j].y, dstPoints[j].x, dstPoints[j].y);
+    }
+  }
 }
