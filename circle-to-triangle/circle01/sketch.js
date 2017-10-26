@@ -8,13 +8,13 @@ var npointsInit = 240;
 var deleteAtIndex;
 var bTransformingFromCircleToTriangle;
 var notTransformingCount;
-var bDrawDebug;
+var bShowDebug;
 
 //------------------------------------------
 function setup() {
   createCanvas(400, 400);
   bTransformingFromCircleToTriangle = false;
-  bDrawDebug = false;
+  bShowDebug = false;
   initialize();
 }
 
@@ -86,17 +86,17 @@ function initialize() {
 
 //------------------------------------------
 function keyPressed() {
-  bDrawDebug = !bDrawDebug;
+  bShowDebug = !bShowDebug;
 }
 
 //------------------------------------------
 function drawDebug() {
-  if (bDrawDebug) {
+  if (bShowDebug) {
     push();
     translate(width / 2, height / 2);
     rotate(-HALF_PI);
     strokeWeight(1);
-    stroke(255, 0, 0, 80);
+    stroke(255, 0, 0, 64);
     for (var i = 0; i < xpoints.length; i++) {
       line(0, 0, xpoints[i], ypoints[i]);
     }
