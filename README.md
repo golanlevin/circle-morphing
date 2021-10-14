@@ -2,6 +2,8 @@
 
 *Computational interpolations from a circle-to-a-square, and circle-to-a-triangle, using [p5.js](p5js.org)*
 
+**THIS SOFTWARE IS NOT FREE. NO COMMERCIAL USE. ATTRIBUTION REQUIRED. BY-NC.**
+
 ![Morph #06 from Circle to Triangle](ct6_300.gif)
 
 ### References / See Also:
